@@ -19,6 +19,7 @@
 import Log from '../utils/logger.js';
 import SpeedSampler from './speed-sampler.js';
 import {LoaderStatus, LoaderErrors} from './loader.js';
+import Base64Loader from './base64-loader';
 import FetchStreamLoader from './fetch-stream-loader.js';
 import MozChunkedLoader from './xhr-moz-chunked-loader.js';
 import MSStreamLoader from './xhr-msstream-loader.js';
@@ -237,7 +238,9 @@ class IOController {
     }
 
     _selectLoader() {
-        if (this._isWebSocketURL) {
+        if (this._dataSource.data) {
+            this._loaderClass = Base64Loader;
+        } else if (this._isWebSocketURL) {
             this._loaderClass = WebSocketLoader;
         } else if (FetchStreamLoader.isSupported()) {
             this._loaderClass = FetchStreamLoader;

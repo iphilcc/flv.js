@@ -41,7 +41,9 @@ class TransmuxingController {
             mediaDataSource.segments = [{
                 duration: mediaDataSource.duration,
                 filesize: mediaDataSource.filesize,
-                url: mediaDataSource.url
+                url: mediaDataSource.url,
+                data: mediaDataSource.data,
+                split: mediaDataSource.split,
             }];
         }
 
